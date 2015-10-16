@@ -230,6 +230,27 @@ say @a[1].perl;   # 2
 ```
 
 ---
+## pushとappendの違い
+
+* `push`は配列に1つの要素を追加する(追加する要素が配列の場合は展開されない)
+* `append`は配列に複数の要素を追加する(追加する要素が配列の場合は展開される)
+* Perl5のように`push`は要素を自動的に展開しない
+
+```
+my @a = (1,2,3);
+my @array;
+
+@array.push: @a;
+@array.elems;      # 1
+
+my @b = (4,5,6);
+@array.append: @a;
+@array.elems;      # 4
+@array.perl;       # [[1,2,3], 1, 2, 3]
+```
+
+
+---
 ## ハッシュ
 
 * `%hash`でハッシュを宣言
@@ -1204,6 +1225,18 @@ use A::B;
 
 foo();
 A::B::C.new;
+```
+
+---
+## モジュールのインストール
+
+* pandaを使う
+* 依存モジュールなどまとめてインストール
+
+```
+$ git clone --recursive git://github.com/tadzik/panda.git
+$ cd panda
+$ perl6 bootstrap.pl
 ```
 
 ---
